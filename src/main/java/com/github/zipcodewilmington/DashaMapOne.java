@@ -3,6 +3,7 @@ package com.github.zipcodewilmington;
 public class DashaMapOne extends DashaMap implements HashMapX {
 
 
+
     public void add(Node node, String key, Integer value) {
         Node temp = node;
 
@@ -24,7 +25,15 @@ public class DashaMapOne extends DashaMap implements HashMapX {
 
     @Override
     public String delete(String key) {
-        return null;
+        Node head = find(key);
+        String value = "";
+        while(head != null){
+            if(head.getKey().equals(key)){
+                value = head.getKey();
+            }
+            head = head.getNext();
+        }
+        return value;
     }
 
     @Override
@@ -51,5 +60,11 @@ public class DashaMapOne extends DashaMap implements HashMapX {
         if (input.length() > 0)
             return String.valueOf(input.charAt(0)).toLowerCase();
         return input;
+    }
+    public Node find(String key) {
+        for (int i = 0; i < 26; i++)
+            if (map[i].getKey().equals(hashCasing(key)))
+                return map[i];
+        return null;
     }
 }
